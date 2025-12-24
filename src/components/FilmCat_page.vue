@@ -3,7 +3,7 @@
 </script>
 
 <template>
-
+Каталог фильмов
 </template>
 
 <style scoped>

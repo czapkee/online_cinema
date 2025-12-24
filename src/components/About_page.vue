@@ -3,7 +3,7 @@
 </script>
 
 <template>
-
+"О нас"
 </template>
 
 <style scoped>

@@ -3,9 +3,7 @@
 </script>
 
 <template>
-{{ header
-
-  }}
+  Главная страница
 </template>
 
 <style scoped>

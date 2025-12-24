@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MainPage from "@/views/MainPage.vue";
+import MainPage from "@/components/MainPage.vue";
 import Play_page from "@/components/Play_page.vue";
 import FilmCat_page from "@/components/FilmCat_page.vue";
 import ArtCat_page from "@/components/ArtCat_page.vue";
@@ -42,7 +42,7 @@ const routes = [
         }
     },
     {
-        path: '/Artists',
+        path: '/artists',
         name: 'ArtCatalog',
         component: ArtCat_page,
         props: true,
@@ -51,7 +51,7 @@ const routes = [
         }
     },
     {
-        path: '/About',
+        path: '/about',
         name: 'AboutUS',
         component: About_page,
         props: true,

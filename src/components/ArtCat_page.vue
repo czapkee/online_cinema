@@ -3,7 +3,7 @@
 </script>
 
 <template>
-
+  Актеры
 </template>
 
 <style scoped>
