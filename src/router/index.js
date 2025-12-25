@@ -42,6 +42,15 @@ const routes = [
         }
     },
     {
+        path: '/series',
+        name: 'SerCatalog',
+        component: SerCat_page,
+        props: true,
+        meta: {
+            title: 'Каталог Сериалов'
+        }
+    },
+    {
         path: '/artists',
         name: 'ArtCatalog',
         component: ArtCat_page,
