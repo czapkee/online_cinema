@@ -110,7 +110,6 @@ export default {
       showDropdown: false,
 
       // Моковые данные для демонстрации
-      // В реальном приложении эти данные будут приходить с бэкенда
       movies: mockMovies
     };
   },
@@ -246,7 +245,7 @@ export default {
 
 .search-box {
   width: 100%;
-  padding: 14px 20px 14px 50px;
+  padding: 14px 20px 12px 70px;
   border-radius: 50px;
   border: 2px solid #1C1C1C;
   background-color: #1C1C1C;
@@ -274,7 +273,7 @@ export default {
   background-color: #EF959B;
   color: #000000;
   border: none;
-  padding: 12px 28px;
+  padding: 15px 28px;
   border-radius: 50px;
   font-weight: 600;
   font-size: 16px;
@@ -319,6 +318,7 @@ export default {
   border-bottom: 1px solid #333;
   cursor: pointer;
   transition: background-color 0.2s;
+  color: white;
 }
 
 .search-results li:hover {
@@ -342,6 +342,7 @@ export default {
   padding: 8px 16px;
   border-radius: 50px;
   transition: background-color 0.3s;
+  color: white;
 }
 
 .user-info:hover {
@@ -385,6 +386,7 @@ export default {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: white;
 }
 
 .user-dropdown li:hover {
