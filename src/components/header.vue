@@ -87,7 +87,6 @@ export default {
   name: 'KinoHeader',
 
   props: {
-    // Эти данные должны приходить с бэкенда
     initialLoggedIn: {
       type: Boolean,
       default: false
@@ -108,8 +107,6 @@ export default {
       showResults: false,
       isLoggedIn: this.initialLoggedIn,
       showDropdown: false,
-
-      // Моковые данные для демонстрации
       movies: mockMovies
     };
   },
@@ -129,8 +126,6 @@ export default {
     searchResults() {
       if (!this.searchQuery) return [];
       const query = this.searchQuery.toLowerCase();
-
-      // В реальном приложении здесь будет запрос к API
       return this.movies.filter(movie =>
           movie.title.toLowerCase().includes(query) ||
           movie.year.toString().includes(query)
@@ -142,9 +137,6 @@ export default {
     handleSearchInput(event) {
       this.searchQuery = event.target.value;
       this.$emit('search', this.searchQuery);
-
-      // В реальном приложении здесь будет debounce и запрос к API
-      console.log('Поисковый запрос:', this.searchQuery);
     },
 
     selectResult(result) {
@@ -154,13 +146,11 @@ export default {
     },
 
     login() {
-      // В реальном приложении здесь будет запрос к API
       this.isLoggedIn = true;
       this.$emit('login');
     },
 
     logout() {
-      // В реальном приложении здесь будет запрос к API
       this.isLoggedIn = false;
       this.showDropdown = false;
       this.$emit('logout');
@@ -208,32 +198,47 @@ export default {
 
 <style scoped>
 .header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: #000000;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(239, 149, 155, 0.15);
-  padding: 20px 30px;
-  margin-bottom: 30px;
-  transition: all 0.3s ease;
+  z-index: 1000;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 0 30px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .logo {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 600;
   color: #EF959B;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  white-space: nowrap;
+  transition: all 0.3s;
+}
+
+.logo:hover {
+  color: #e87c83;
+  transform: scale(1.05);
 }
 
 .logo i {
-  font-size: 30px;
+  font-size: 34px;
 }
 
 .search-container {
@@ -245,7 +250,7 @@ export default {
 
 .search-box {
   width: 100%;
-  padding: 14px 20px 12px 70px;
+  padding: 14px 20px 14px 55px;
   border-radius: 50px;
   border: 2px solid #1C1C1C;
   background-color: #1C1C1C;
@@ -262,7 +267,7 @@ export default {
 
 .search-icon {
   position: absolute;
-  left: 18px;
+  left: 20px;
   top: 50%;
   transform: translateY(-50%);
   color: #EF959B;
@@ -273,7 +278,7 @@ export default {
   background-color: #EF959B;
   color: #000000;
   border: none;
-  padding: 15px 28px;
+  padding: 12px 28px;
   border-radius: 50px;
   font-weight: 600;
   font-size: 16px;
@@ -281,13 +286,14 @@ export default {
   transition: all 0.3s;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  white-space: nowrap;
 }
 
 .login-btn:hover {
   background-color: #e87c83;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(239, 149, 155, 0.3);
+  box-shadow: 0 6px 15px rgba(239, 149, 155, 0.3);
 }
 
 .login-btn i {
@@ -300,30 +306,36 @@ export default {
   left: 0;
   right: 0;
   background-color: #1C1C1C;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-top: 10px;
   padding: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
   z-index: 100;
   max-height: 300px;
   overflow-y: auto;
+  border: 1px solid #333;
 }
 
 .search-results ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .search-results li {
   padding: 12px 15px;
+  border-radius: 10px;
   border-bottom: 1px solid #333;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   color: white;
+  margin-bottom: 5px;
 }
 
 .search-results li:hover {
   background-color: #2a2a2a;
   color: #EF959B;
+  transform: translateX(5px);
 }
 
 .search-results li:last-child {
@@ -339,19 +351,22 @@ export default {
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 50px;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
   color: white;
+  white-space: nowrap;
+  background-color: #1a1a1a;
 }
 
 .user-info:hover {
   background-color: #2a2a2a;
+  transform: scale(1.05);
 }
 
 .user-avatar {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background-color: #EF959B;
   display: flex;
@@ -359,6 +374,7 @@ export default {
   justify-content: center;
   font-weight: bold;
   color: #000000;
+  font-size: 18px;
 }
 
 .user-dropdown {
@@ -366,48 +382,59 @@ export default {
   top: 100%;
   right: 0;
   background-color: #1C1C1C;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-top: 10px;
   padding: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
   z-index: 100;
-  min-width: 200px;
+  min-width: 220px;
+  border: 1px solid #333;
 }
 
 .user-dropdown ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .user-dropdown li {
   padding: 12px 15px;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   color: white;
+  margin-bottom: 5px;
 }
 
 .user-dropdown li:hover {
   background-color: #2a2a2a;
   color: #EF959B;
+  transform: translateX(5px);
 }
 
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    gap: 20px;
+  .header-container {
+    padding: 0 15px;
+    height: 70px;
   }
 
   .search-container {
-    margin: 0;
-    width: 100%;
-    max-width: 100%;
+    margin: 0 15px;
   }
 
-  .header-container {
-    padding: 20px;
+  .logo span {
+    display: none;
+  }
+
+  .search-box {
+    padding: 12px 15px 12px 45px;
+  }
+
+  .login-btn {
+    padding: 10px 20px;
   }
 }
 </style>

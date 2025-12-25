@@ -1,22 +1,48 @@
 <script setup>
-  import { useRoute } from 'vue-router'
-  import KinoHeader from "@/components/header.vue";
-  import SideMenu from '@/components/SideMenu.vue'
-  import RoutesTestComponent from "@/components/RoutesTestComponent.vue";
-  useRoute();
+import { useRoute } from 'vue-router'
+import KinoHeader from "@/components/header.vue";
+import SideMenu from '@/components/SideMenu.vue'
+const route = useRoute();
 </script>
 
 <template>
   <div id="app">
-    <main class="container">
-      <kino-header/>
-      <side-menu></side-menu>
-      <routes-test-component/>
-      <router-view />
-    </main>
+    <kino-header/>
+    <div class="main-layout">
+      <side-menu/>
+      <div class="content-wrapper">
+        <router-view :key="route.fullPath"/>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+#app {
+  min-height: 100vh;
+  background-color: #000000;
+}
 
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #000000;
+}
+
+.content-wrapper {
+  flex: 1;
+  padding: 0;
+  margin-left: 240px;
+  padding-top: 80px;
+  width: calc(100% - 240px);
+  background-color: #000000;
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    margin-left: 0;
+    width: 100%;
+    padding-top: 70px;
+  }
+}
 </style>

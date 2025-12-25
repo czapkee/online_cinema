@@ -5,6 +5,7 @@ import FilmCat_page from "@/components/FilmCat_page.vue";
 import ArtCat_page from "@/components/ArtCat_page.vue";
 import About_page from "@/components/About_page.vue";
 import NotFound from "@/components/NotFound.vue";
+import SerCat_page from "@/components/SerCat_page.vue";
 // import TestBack from "@/components/TestBack.vue"; //бэку
 
 const routes = [
