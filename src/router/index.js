@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MainPage from "@/components/MainPage.vue";
-import Play_page from "@/components/Play_page.vue";
-import FilmCat_page from "@/components/FilmCat_page.vue";
-import ArtCat_page from "@/components/ArtCat_page.vue";
-import About_page from "@/components/About_page.vue";
-import NotFound from "@/components/NotFound.vue";
-import SerCat_page from "@/components/SerCat_page.vue";
+import MainPage from "@/views/Main_page.vue";
+import Play_page from "@/views/Play_page.vue";
+import FilmCat_page from "@/views/FilmCat_page.vue";
+import ArtCat_page from "@/views/ArtCat_page.vue";
+import About_page from "@/views/About_page.vue";
+import NotFoundPage from "@/views/NotFound_page.vue";
+import SerCat_page from "@/views/SerCat_page.vue";
 // import TestBack from "@/components/TestBack.vue"; //бэку
 
 const routes = [
     {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
-        component: NotFound,
+        component: NotFoundPage,
         meta: {
             title: 'Страница не найдена'
         }

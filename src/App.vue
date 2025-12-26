@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import KinoHeader from "@/components/header.vue";
-import SideMenu from '@/components/SideMenu.vue'
+import KinoHeader from "@/components/Header.vue";
+import SideMenu from '@/components/Side-menu.vue'
 const route = useRoute();
 </script>
 
