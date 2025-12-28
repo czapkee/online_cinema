@@ -31,11 +31,11 @@ const route = useRoute();
 
 .content-wrapper {
   flex: 1;
-  padding: 0;
   margin-left: 240px;
   padding-top: 80px;
   width: calc(100% - 240px);
   background-color: #000000;
+  min-height: calc(100vh - 80px);
 }
 
 @media (max-width: 768px) {
