@@ -1,0 +1,58 @@
+services:
+  database:
+    image: postgres:18.1-alpine
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker-files/Nest.Dockerfile
+      args:
+        BACKEND_PATH: ${BACKEND_PATH}
+    ports:
+      - "${BACKEND_PORT}:3000"
+    environment:
+      - DB_URL=${DB_URL}
+      - BACKEND_ALLOWED_ORIGINS=${BACKEND_ALLOWED_ORIGINS}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_ACCESS_TOKEN_TTL=${JWT_ACCESS_TOKEN_TTL}
+      - JWT_REFRESH_TOKEN_TTL=${JWT_REFRESH_TOKEN_TTL}
+      - COOKIE_DOMAIN=${COOKIE_DOMAIN}
+      - NODE_ENV=${NODE_ENV}
+    volumes:
+      - ./backend:/app/
+      - ./backend/node_modules:/app/node_modules
+    depends_on:
+      database:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker-files/Vue.Dockerfile
+      args:
+        FRONTEND_PATH: ${FRONTEND_PATH}
+    ports:
+      - "${FRONTEND_PORT}:5173"
+    environment:
+      - VITE_APP_API_URL=${VITE_APP_API_URL}
+    volumes:
+      - ./frontend:/app/
+      - ./frontend/node_modules:/app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

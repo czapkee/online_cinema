@@ -1,0 +1,29 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "./generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  first_name    String  @db.VarChar(30)
+  last_name     String? @db.VarChar(30)
+  password_hash String
+
+  username   String? @unique @db.VarChar(50)
+  avatar_url String?
+
+  phone String @unique @db.VarChar(20)
+  email String @unique @db.VarChar(60)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([email])
+  @@map("users")
+}
